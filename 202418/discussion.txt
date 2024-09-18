@@ -1,0 +1,20 @@
+-passing arg idf diff type 
+-primitive type pass by value
+reference typepass by reference
+
+-iterator
+-tuple
+-list
+=dict
+-set
+-frozenset
+bytearray
+object/instance
+
+
+
+using tuple packing
+variable args--*arg_name=tuple
+variable names--**arg_name=dict
+
+

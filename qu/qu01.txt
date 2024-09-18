@@ -1,0 +1,1 @@
+list:['ist', 'tuple', 'kiran', 'anil', 'delli']tuple:('ist', 'tuple', 'kiran', 'anil', 'delli')

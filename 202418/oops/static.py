@@ -1,0 +1,15 @@
+class MyClass:
+    class_var = 0
+    
+    @classmethod
+    def class_method(cls):
+        return cls.class_var
+    
+    @staticmethod
+    def static_method():
+        return "This is a static method."
+    
+print(MyClass.class_method())  # Output: 0
+
+
+print(MyClass.static_method())

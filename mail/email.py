@@ -1,35 +1,38 @@
-#https://stackoverflow.com/questions/72480454/sending-email-with-python-google-disables-less-secure-apps
-
-'''
-To send mail 
-    enable in gmail the 2 step verification 
-Then 
-    use below link to create app password
-    with app password and your mail id try to run the below code
-
-    #https://support.google.com/accounts/answer/185833?hl=en
-'''
-
-import subprocess
-serial =subprocess.check_output('wmic bios get serialnumber').decode("utf-8").replace('SerialNumber','').strip() 
-
-import smtplib as smtp
-from datetime import datetime
-connection = smtp.SMTP_SSL('smtp.gmail.com', 465)
-    
-email_addr = 'dubaanilkumar99@gmail.com'
-email_passwd = 'wtgf ytad pbti qgmw'
-connection.login(email_addr, email_passwd)
-
-receiver='gmaheswaranmca@gmail.com'
-mail_body="I develop app to send mails"
-dt_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-subject = f'my app {dt_time} @{serial}'
-
+import smtplib
+from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+# Email details
+sender_email = "dubaanilkumar99@gmail.com"
+receiver_email = "gmaheswaranmca@yahoo.com"
+subject = "Test Email from Python"
+body = "This is a test email sent from Python!"
+
+# Create the email message
 msg = MIMEMultipart()
-msg['From'] = email_addr
-msg['To'] = receiver
+msg['From'] = sender_email
+msg['To'] = receiver_email
 msg['Subject'] = subject
-connection.sendmail(email_addr, receiver, msg.as_string())
-connection.close()
+
+# Attach the email body
+msg.attach(MIMEText(body, 'plain'))
+
+# SMTP server details
+smtp_server = "smtp.gmail.com"
+port = 587  # For TLS (or use 465 for SSL)
+password = "wtgf ytad pbti qgmw"
+
+# Create a secure connection with the SMTP server
+try:
+    server = smtplib.SMTP(smtp_server, port)
+    server.starttls()  # Secure the connection with TLS
+    server.login(sender_email, password)
+
+    # Send the email
+    server.sendmail(sender_email, receiver_email, msg.as_string())
+    print("Email sent successfully!")
+    
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    server.quit()  # Close the connection

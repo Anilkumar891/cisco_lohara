@@ -1,3 +1,5 @@
+from c import create_database,add_account,check_balance,deposit,withdraw,transfer_file,send_email_alert,process_transactions,run_concurrent_tasks
+
 class BankAccount:
 
     def deposit(self, amount):
@@ -48,6 +50,7 @@ class Bank:
         address = input("Enter Address: ")
         phone_number = input("Enter Phone Number: ")
         email = input("Enter Email: ")
+
 
         if account_number in self.accounts:
             print("--------Account already exists.----------------")
@@ -116,16 +119,31 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == '1':
+            id=int(input("enter the number"))
+            account_number = input("Enter Account Number: ")
+            account_name = input("Enter Account Name: ")
+            initial_balance = float(input("Enter Initial Balance: "))
+            address = input("Enter Address: ")
+            phone_number = input("Enter Phone Number: ")
+            email = input("Enter Email: ")
+            create_database()
+            add_account(account_name,initial_balance)
             bank.create_account()
         elif choice == '2':
+            check_balance(id)
             account_number = input("Enter account number: ")
             amount = float(input("Enter deposit amount: "))
             bank.deposit(account_number, amount)
         elif choice == '3':
+           
             account_number = input("Enter account number: ")
             amount = float(input("Enter withdrawal amount: "))
+            amount2 = float(input("Enter deposit amount: "))
+            process_transactions(id,amount,amount2)
+            check_balance(id)
             bank.withdraw(account_number, amount)
         elif choice == '4':
+            run_concurrent_tasks()
             bank.display_account()
         elif choice == '5':
             account_number = input("Enter account number: ")
@@ -141,3 +159,4 @@ def main():
 
 
 main()
+
